@@ -11,9 +11,20 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
+@Testcontainers
 @AutoConfigureMockMvc
 public class ClientControllerIT {
+        @Container
+        private static final MySQLContainer<?> SQL_CONTAINER = new MySQLContainer<>()
+                .withDatabaseName("just_dab_db");
 
+        @DynamicPropertySource
+        static void configureMySqlProperties(DynamicPropertyRegistry registry) {
+            registry.add("spring.datasource.url", SQL_CONTAINER::getJdbcUrl);
+            registry.add("spring.datasource.username", SQL_CONTAINER::getUsername);
+            registry.add("spring.datasource.password", SQL_CONTAINER::getPassword);
+        }
+    
     @Autowired
     private MockMvc mockMvc;
 
