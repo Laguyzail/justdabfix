@@ -3,7 +3,7 @@ name: Check - BackEnd
 on:
   push:
     branches:
-      - test
+      - test2
   pull_request:
 
 jobs:
