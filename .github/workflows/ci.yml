@@ -33,7 +33,6 @@ jobs:
 
       - name: Execute Gradle Tests
         run: |
-          cd MedHeadBackEnd
           ./gradlew test
 
       - name: Store Tests Reports
@@ -46,8 +45,7 @@ jobs:
             **/build/test-results/   
 
       - name: Execute Gradle build
-        run: |
-          cd MedHeadBackEnd          
+        run: |          
           ./gradlew build
 
       - name: Store Production Artifact
